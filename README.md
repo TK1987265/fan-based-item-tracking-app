@@ -4,6 +4,64 @@
 ## Description
 This project is a full-stack application built using Flask for the backend and React for the frontend. The application allows users to track items across various locations, submit and manage the items and their status (obtained or not obtained) at each location.
 
+## user story
+As a user
+I can:
+View all locations and items in the inventory system.
+Add new items to specific locations in the inventory.
+Edit details of existing items in the inventory.
+Delete items from the inventory.
+Mark items as obtained or not obtained.
+So that I can:
+Efficiently manage and track inventory items across different locations.
+Ensure inventory data is accurate and up-to-date.
+Quickly identify and rectify discrepancies in inventory.
+
+
+## Acceptance Criteria:
+View Locations and Items:
+
+Given: I am on the Locations or Items page.
+When: I access the page.
+Then: I can see a list of all locations or items in the system.
+Add New Location Item:
+
+Given: I am on the Location Items page.
+When: I select a location and an item, set the obtained status, and submit the form.
+Then: The new location item is added to the list and stored in the system.
+Edit Location Item:
+
+Given: I am on the Location Items page and there are existing location items.
+When: I click the edit button next to a location item, update the details, and submit the form.
+Then: The updated location item is saved in the system and the changes are reflected in the list.
+
+## Delete Location Item:
+
+Given: I am on the Location Items page and there are existing location items.
+When: I click the delete button next to a location item and confirm the deletion.
+Then: The location item is removed from the list and deleted from the system.
+Toggle Obtained Status:
+
+Given: I am on the Location Items page and there are existing location items.
+When: I view the obtained status of an item.
+Then: I can see whether the item is marked as obtained or not obtained.
+
+## Mockup:
+Home Page:
+
+Navigation bar with links to Home, Locations, Items, and Location Items.
+Locations Page:
+
+List of all locations with the ability to add new locations.
+Items Page:
+
+List of all items with the ability to add new items.
+Location Items Page:
+
+List of all location items.
+Form to add a new location item.
+Buttons to edit or delete existing location items.
+
 ## Directory Structure
 client/
 src/: Contains all the React components and other frontend code.

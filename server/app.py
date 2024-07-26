@@ -15,10 +15,26 @@ def get_locations():
     locations = Location.query.all()
     return jsonify([location.to_dict() for location in locations])
 
+@app.route('/locations', methods=['POST'])
+def create_location():
+    data = request.get_json()
+    new_location = Location(name=data['name'])
+    db.session.add(new_location)
+    db.session.commit()
+    return jsonify(new_location.to_dict()), 201
+
 @app.route('/items', methods=['GET'])
 def get_items():
     items = Item.query.all()
     return jsonify([item.to_dict() for item in items])
+
+@app.route('/items', methods=['POST'])
+def create_item():
+    data = request.get_json()
+    new_item = Item(name=data['name'])
+    db.session.add(new_item)
+    db.session.commit()
+    return jsonify(new_item.to_dict()), 201
 
 @app.route('/locationitems', methods=['GET'])
 def get_location_items():
@@ -36,6 +52,27 @@ def create_location_item():
     db.session.add(new_location_item)
     db.session.commit()
     return jsonify(new_location_item.to_dict()), 201
+
+@app.route('/locationitems/<int:id>', methods=['PUT'])
+def update_location_item(id):
+    data = request.get_json()
+    location_item = LocationItem.query.get(id)
+    if location_item:
+        location_item.location_id = data['location_id']
+        location_item.item_id = data['item_id']
+        location_item.obtained = data.get('obtained', location_item.obtained)
+        db.session.commit()
+        return jsonify(location_item.to_dict())
+    return jsonify({'error': 'LocationItem not found'}), 404
+
+@app.route('/locationitems/<int:id>', methods=['DELETE'])
+def delete_location_item(id):
+    location_item = LocationItem.query.get(id)
+    if location_item:
+        db.session.delete(location_item)
+        db.session.commit()
+        return jsonify({'message': 'LocationItem deleted successfully'})
+    return jsonify({'error': 'LocationItem not found'}), 404
 
 if __name__ == '__main__':
     app.run(debug=True)

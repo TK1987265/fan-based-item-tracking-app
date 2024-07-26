@@ -5,3 +5,27 @@
   --text: hsla(0, 0%, 100%, 0.88);
 }
 
+.loc-items li{
+  margin-bottom: 5px;
+}
+
+.navbar {
+  background-color: black;
+  padding: 1em;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.navbar-link {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2em;
+}
+
+.navbar-link:hover {
+  text-decoration: underline;
+}
