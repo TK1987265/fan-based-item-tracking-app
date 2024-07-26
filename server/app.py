@@ -10,6 +10,11 @@ db.init_app(app)
 migrate = Migrate(app, db)
 CORS(app)
 
+
+@app.route('/')
+def index():
+    return "item tracking app"
+
 @app.route('/locations', methods=['GET'])
 def get_locations():
     locations = Location.query.all()
