@@ -11,7 +11,7 @@ class Location(db.Model):
         return {
             'id': self.id,
             'name': self.name,
-            # Only include basic info to avoid recursion
+      
             'items': [{'id': item.item.id, 'name': item.item.name} for item in self.items]
         }
 
@@ -24,7 +24,7 @@ class Item(db.Model):
         return {
             'id': self.id,
             'name': self.name,
-            # Only include basic info to avoid recursion
+           
             'locations': [{'id': location.location.id, 'name': location.location.name} for location in self.locations]
         }
 
