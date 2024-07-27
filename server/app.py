@@ -98,9 +98,9 @@ db.init_app(app)
 migrate = Migrate(app, db)
 CORS(app)
 
-with app.app_context():
-    db.create_all()
-    upgrade()
+# with app.app_context():
+#     db.create_all()
+#     upgrade()
 
 @app.route('/')
 def index():
