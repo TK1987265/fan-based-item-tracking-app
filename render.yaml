@@ -2,8 +2,8 @@ services:
   - type: web
     name: fan-based-item-tracking-app
     env: python
-    buildCommand: poetry install
-    startCommand: poetry run python app.py
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "cd server && python app.py"
     envVars:
       - key: DATABASE_URL
         value: 'sqlite:///app.db' 
