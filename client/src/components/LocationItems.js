@@ -67,6 +67,7 @@ const LocationItems = () => {
       .then(response => response.json())
       .then(() => {
         setLocationItems(locationItems.filter(item => item.id !== id));
+        // window.location.reload();
       })
       .catch(error => console.error('Error deleting location item:', error));
   };

@@ -1,3 +1,5 @@
+# models.py
+
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
@@ -5,27 +7,25 @@ db = SQLAlchemy()
 class Location(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
-    items = db.relationship('LocationItem', back_populates='location')
+    location_items = db.relationship('LocationItem', backref='location', lazy=True)
 
     def to_dict(self):
         return {
             'id': self.id,
-            'name': self.name,
-      
-            'items': [{'id': item.item.id, 'name': item.item.name} for item in self.items]
+            'name': self.name
         }
 
 class Item(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
-    locations = db.relationship('LocationItem', back_populates='item')
+    cost = db.Column(db.Integer, nullable=False)
+    location_items = db.relationship('LocationItem', backref='item', lazy=True)
 
     def to_dict(self):
         return {
             'id': self.id,
             'name': self.name,
-           
-            'locations': [{'id': location.location.id, 'name': location.location.name} for location in self.locations]
+            'cost': self.cost
         }
 
 class LocationItem(db.Model):
@@ -33,8 +33,6 @@ class LocationItem(db.Model):
     location_id = db.Column(db.Integer, db.ForeignKey('location.id'), nullable=False)
     item_id = db.Column(db.Integer, db.ForeignKey('item.id'), nullable=False)
     obtained = db.Column(db.Boolean, default=False)
-    location = db.relationship('Location', back_populates='items')
-    item = db.relationship('Item', back_populates='locations')
 
     def to_dict(self):
         return {
