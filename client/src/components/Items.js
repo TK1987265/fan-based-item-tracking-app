@@ -29,34 +29,7 @@ const Items = () => {
       });
   };
 
-  const updateItem = (id, values) => {
-    fetch(`http://localhost:5000/items/${id}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(values),
-    })
-      .then(response => response.json())
-      .then(data => {
-        setItems(items.map(item => item.id === id ? data : item));
-      })
-      .catch(error => {
-        console.error('Error updating item:', error);
-      });
-  };
-
-  const deleteItem = (id) => {
-    fetch(`http://localhost:5000/items/${id}`, {
-      method: 'DELETE',
-    })
-      .then(() => {
-        setItems(items.filter(item => item.id !== id));
-      })
-      .catch(error => {
-        console.error('Error deleting item:', error);
-      });
-  };
-
-  return (
+   return (
     <div>
       <h2>Items</h2>
       <Formik
