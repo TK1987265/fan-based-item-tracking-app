@@ -5,13 +5,27 @@ from flask_migrate import Migrate
 from flask_cors import CORS
 from models import db, Location, Item, LocationItem
 
-app = Flask(__name__)
+# app = Flask(__name__)
+app = Flask(
+    __name__,
+    static_url_path='',
+    static_folder='../client/build',
+    template_folder='../client/build'
+)
+
+
+
+
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 migrate = Migrate(app, db)
 CORS(app)  
 
+@app.errorhandler(404)
+def not_found(e):
+    return render_template("index.html")
+    
 @app.route('/')
 def index():
     return "Welcome to the API"
