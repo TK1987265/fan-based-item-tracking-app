@@ -1,9 +1,9 @@
-# seed.py
+
 
 from app import app
 from models import db, Location, Item, LocationItem
 
-# Create the tables
+
 with app.app_context():
     db.create_all()
 
@@ -27,7 +27,7 @@ items_data = [
     {"name": "Exquisite Screw", "cost": 600, "locations": ["Ebisu Pawn", "Club SEGA Nakamichi pickup"]}
 ]
 
-# Clear existing data
+
 with app.app_context():
     db.session.query(LocationItem).delete()
     db.session.query(Item).delete()
