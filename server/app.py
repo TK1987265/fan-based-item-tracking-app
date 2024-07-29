@@ -1,6 +1,4 @@
-
-
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_from_directory
 from flask_migrate import Migrate
 from flask_cors import CORS
 from models import db, Location, Item, LocationItem
@@ -9,10 +7,9 @@ from models import db, Location, Item, LocationItem
 app = Flask(
     __name__,
     static_url_path='',
-    static_folder='../client/build',
-    template_folder='../client/build'
+    static_folder='../client/build'
+    # template_folder='../client/build'
 )
-
 
 
 
@@ -24,11 +21,11 @@ CORS(app)
 
 @app.errorhandler(404)
 def not_found(e):
-    return render_template("index.html")
-    
+    return 'Rount not found'
+
 @app.route('/')
 def index():
-    return "Welcome to the API"
+    return send_from_directory(app.static_folder, "index.html")
 
 @app.route('/locations', methods=['GET'])
 def get_locations():
