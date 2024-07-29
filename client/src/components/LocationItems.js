@@ -64,13 +64,12 @@ const LocationItems = () => {
     fetch(`http://localhost:5000/locationitems/${id}`, {
       method: 'DELETE',
     })
-      .then(response => response.json())
       .then(() => {
-        setLocationItems(locationItems.filter(item => item.id !== id));
-        // window.location.reload();
+        setLocationItems(prevItems => prevItems.filter(item => item.id !== id));
       })
       .catch(error => console.error('Error deleting location item:', error));
   };
+
 
   const getLocationNameById = (id) => {
     const location = locations.find(location => location.id === id);
